@@ -14,8 +14,14 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.collaborationbackend.model.Blog;
+import com.niit.collaborationbackend.model.Chat;
+import com.niit.collaborationbackend.model.Forum;
 import com.niit.collaborationbackend.model.Friends;
+import com.niit.collaborationbackend.model.Job;
+import com.niit.collaborationbackend.model.JobApplication;
 import com.niit.collaborationbackend.model.User;
+
 
 @Configuration
 @ComponentScan("com.niit.collaboration")
@@ -28,10 +34,10 @@ public class ApplicationContextConfig {
 	{
 	DriverManagerDataSource datasource=new DriverManagerDataSource();
 	datasource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-	datasource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+	datasource.setUrl("");
 	
-    datasource.setUsername("system");
-    datasource.setPassword("oracle");
+    datasource.setUsername("SYSTEM");
+    datasource.setPassword("root");
     
    Properties connectionProperties = new Properties();
     connectionProperties.setProperty("hibernate.hbm2ddl.auto","update");
@@ -60,9 +66,15 @@ public class ApplicationContextConfig {
    public SessionFactory getSessionFactory(DataSource datasouce){
    LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(getOracleDataSource());
 	sessionBuilder.addProperties(getHibernateProperties());
-	
+		sessionBuilder.addAnnotatedClass(Chat.class);
+		sessionBuilder.addAnnotatedClass(Forum.class);
+		sessionBuilder.addAnnotatedClass(Blog.class);
 		sessionBuilder.addAnnotatedClass(Friends.class);
+		sessionBuilder.addAnnotatedClass(Job.class);
+		sessionBuilder.addAnnotatedClass(JobApplication.class);
 		sessionBuilder.addAnnotatedClass(User.class);
+		
+		
 		System.out.println("Database connected");
 		return sessionBuilder.buildSessionFactory();
 	
