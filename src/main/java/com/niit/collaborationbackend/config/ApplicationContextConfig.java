@@ -24,7 +24,7 @@ import com.niit.collaborationbackend.model.User;
 
 
 @Configuration
-@ComponentScan("com.niit.collaboration")
+@ComponentScan("com.niit")
 @EnableTransactionManagement
 
 public class ApplicationContextConfig {
