@@ -23,6 +23,7 @@ import com.niit.collaborationbackend.model.Blog;
 
 public class BlogController {
 
+
 	@Autowired
 	private BlogDAO blogDAO;
 	

@@ -49,35 +49,21 @@ public class UserController {
 	}
 	
    @RequestMapping(value = "/user/" , method = RequestMethod.POST)
-   public ResponseEntity<User> createuser(@RequestBody User user)
+   public ResponseEntity<User> createuser (@RequestBody User user)
    {
 	   Logger.debug("->->-> calling method createUser");
-	   
-	   if(userDAO.get(user.getId()) != null)
-	   {//User Exist with this id.
-		   
+	   if(userDAO.get(user.getId()) == null)
+	   {
+		   user.setIsOnline('N');
+		   userDAO.save(user);
+		   user.setErrorCode("200");
+		   user.setErrorMessage("Thank You for registration .The operation are completed");
+		   return new ResponseEntity<User>(user, HttpStatus.OK);
+	   }
+	  
 	   user.setErrorCode("404");
 	   user.setErrorMessage("User already exist with id : " +user.getId());
-	   }
-	   else
-	   {
-		   user.setStatus('N');
-		   user.setIsOnline('N');
-		   Logger.debug("Going to save in DB");
-		   
-		   boolean flag = userDAO.save(user);
-		   
-		   if(userDAO.save(user)==false)
-		   {
-			   Logger.debug("Not able to register, Please contact admin");
-			   user.setErrorCode("404");
-			   user.setErrorMessage("Not able to register, please contact admin");
-		   }
-	   }
-	   
-	   Logger.debug("Ending the method register");
-	   
-	   return new ResponseEntity<User>(user , HttpStatus.OK);
+	   return new ResponseEntity<User>(user, HttpStatus.OK);
    }
 	
    @RequestMapping(value = "/user/{id}" , method = RequestMethod.PUT)
@@ -111,22 +97,23 @@ public class UserController {
 	   return new ResponseEntity<User>(user, HttpStatus.OK); 
    }
    
-   @RequestMapping(value="/user",method = RequestMethod.GET)
-	public ResponseEntity<User> getuser(@PathVariable("id") String id)
-	{
-	   Logger.debug("->->-> calling method getUser");
-	   Logger.debug("->->->->"+id);
-	   User user = userDAO.get(id);
-	   if(userDAO.get(id) == null)
-	   { 
-		   Logger.debug("->->->->User does not exist with id " +id);
-		   user = new User();
-		   user.setErrorMessage("User does not exist with id ");
-		   return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
-	   }
-	   Logger.debug("->->->->User exist with id " +id);
-	   return new ResponseEntity<User>(user, HttpStatus.OK); 
-	}
+
+   @RequestMapping(value="/user/{id}",method = RequestMethod.GET)
+  	public ResponseEntity<User> getuser(@PathVariable("id") String id)
+  	{
+  	   Logger.debug("->->-> calling method getUser");
+  	   Logger.debug("->->->->"+id);
+  	   User user = userDAO.get(id);
+  	   if(userDAO.get(id) == null)
+  	   { 
+  		   Logger.debug("->->->->User does not exist with id " +id);
+  		   user = new User();
+  		   user.setErrorMessage("User does not exist with id ");
+  		   return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+  	   }
+  	   Logger.debug("->->->->User exist with id " +id);
+  	   return new ResponseEntity<User>(user, HttpStatus.OK); 
+  	}
    
    @RequestMapping(value = "/user/authenticate/", method = RequestMethod.POST)
    public ResponseEntity<User> authenticate(@RequestBody User user, HttpSession session)
@@ -160,5 +147,5 @@ public class UserController {
 	  
 	  return ("You successfully loggedout");
    }
-   
+
 }

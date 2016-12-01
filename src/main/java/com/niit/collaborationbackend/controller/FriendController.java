@@ -21,7 +21,6 @@ import com.niit.collaborationbackend.model.User;
 @RestController
 
 public class FriendController {
-
 	@Autowired
 	FriendsDAO friendsDAO;
 	
@@ -95,7 +94,5 @@ public class FriendController {
 	
 		List<Friends> myFriends = friendsDAO.getMyFriend(id);
 		return new ResponseEntity<List<Friends>>(myFriends, HttpStatus.OK);
-	}
-	
-	
+}
 }
