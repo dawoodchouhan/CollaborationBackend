@@ -24,7 +24,7 @@ import com.niit.collaborationbackend.model.User;
 
 
 @Configuration
-@ComponentScan("com.niit")
+@ComponentScan("com.niit.collaborationbackend")
 @EnableTransactionManagement
 
 public class ApplicationContextConfig {
@@ -36,7 +36,7 @@ public class ApplicationContextConfig {
 	datasource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 	datasource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
 	
-    datasource.setUsername("SYSTEM");
+    datasource.setUsername("DAWOOD");
     datasource.setPassword("root");
     
    Properties connectionProperties = new Properties();
