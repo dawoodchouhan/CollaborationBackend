@@ -1,5 +1,6 @@
 package com.niit.collaborationbackend.dao;
 
+
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -28,13 +29,13 @@ public class FriendsDAOImpl implements FriendsDAO {
 			this.sessionFactory=sessionFactory;
 		}
 		
-		private Integer getMaxId()
+		/*private Integer getMaxId()
 		{
 			String hql = "select max{id} from friend";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			Integer maxID = (Integer) query.uniqueResult();
 			return maxID;
-		}
+		}*/
 		
 		@Transactional
 		public boolean save(Friends friends){	
@@ -125,7 +126,7 @@ public class FriendsDAOImpl implements FriendsDAO {
 		@Transactional
 		public void setOnline(String userID) {
 			Logger.debug("Starting of the method setOnline");
-			String hql = "UPDATE Friend SET isOnline = 'Y' where userID ='" + "'";
+			String hql = "UPDATE Friend SET isOnline = 'Y' where userID ='" + userID + "'";
 			Logger.debug("hql: " + hql);
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			query.executeUpdate();
@@ -142,6 +143,6 @@ public class FriendsDAOImpl implements FriendsDAO {
 			query.executeUpdate();
 			Logger.debug("Ending of the method setOffline");
 		}
-
+		
 		
 }

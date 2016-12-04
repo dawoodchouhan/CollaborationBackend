@@ -11,7 +11,7 @@ import com.niit.collaborationbackend.model.Friends;
 @Repository
 public interface FriendsDAO {
 
-	public List<Friends> getMyFriend(String id);
+	public List<Friends> getMyFriend(String userID);
 	
 	public Friends get(String userID, String friendID);
 	
@@ -21,5 +21,6 @@ public interface FriendsDAO {
 		public List<Friends> getNewFriendRequests(String userID);
 		public void setOnline(String userID);
 		public void setOffLine(String loggedInUserID);
+	
 	
 }

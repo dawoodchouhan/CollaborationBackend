@@ -1,5 +1,6 @@
 package com.niit.collaborationbackend.model;
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table(name="c_JobApplication")
+@Table(name="c_jobapplication")
 public class JobApplication {
 
 	@Id
@@ -22,14 +23,15 @@ public class JobApplication {
 	private int jobID;
     private Date dateApplied;
     private String remarks;
-    private char status;
+    private String status;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-    
+	
+	
 	public String getUserID() {
 		return userID;
 	}
@@ -54,12 +56,13 @@ public class JobApplication {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
+	
     
 	
 	

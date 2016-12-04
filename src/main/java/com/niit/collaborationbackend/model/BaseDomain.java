@@ -9,7 +9,7 @@ public class BaseDomain {
 
 	@Transient
 	public String errorCode;
-	
+
 	@Transient
 	public String errorMessage;
 
@@ -28,5 +28,5 @@ public class BaseDomain {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-	
+
 }

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.collaborationbackend.model.Blog;
 import com.niit.collaborationbackend.model.Job;
 import com.niit.collaborationbackend.model.JobApplication;
+
 
 
 @SuppressWarnings("deprecation")
@@ -52,34 +54,6 @@ public class JobDAOImpl implements JobDAO {
 			return true;
 		}	
 		
-		/*private Integer getMaxId()
-		{
-			Integer maxID=100;
-			try{
-				String hql="select max(jobId) from job";
-				Query query = sessionFactory.getCurrentSession().createQuery(hql);
-				maxID=(Integer) query.uniqueResult();
-			} catch(Exception e){
-				maxID=100;
-				e.printStackTrace();
-			}
-			return maxID+1;
-		}*/
-		
-		/*@Transactional
-		public boolean save(JobApplication jobApplication) {
-			jobApplication.setId(getMaxId());
-		    sessionFactory.getCurrentSession().save(jobApplication);
-		    return false;
-				
-			}*/
-		/*@Transactional
-		public boolean save(Job job) {
-			job.setId(getMaxId());
-		    sessionFactory.getCurrentSession().save(job);
-		    return false;
-				
-			}*/
 		
 		@Transactional
 		public boolean postJob(Job job) {
@@ -112,7 +86,7 @@ public class JobDAOImpl implements JobDAO {
 		@SuppressWarnings("rawtypes")
 		Query query =sessionFactory.getCurrentSession().createQuery(hql);
 		
-		List<Job> listJob = query.list();
+		List<Blog> listJob = query.list();
 		if(listJob == null  || listJob.isEmpty())
 		{
 			 return null;
@@ -167,19 +141,18 @@ public class JobDAOImpl implements JobDAO {
 		
 		@Transactional
 		public List<Job> getAllJobs() {
-			String hql = "from Job";
+			String hql = "fromJob";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			return query.list();
 		}
 
-		@Transactional
-		public Job getJobDetails(int jobID) {
-			return (Job) sessionFactory.getCurrentSession().get(Job.class, jobID);
+		public Job getJobDetails(int JobID) {
+			return (Job) sessionFactory.getCurrentSession().get(Job.class, JobID);
 		}
-
-		@Transactional
-		public JobApplication getJobApplication(int jobID) {
-			String hql= "from JobApplication where jobID = " + "'" + jobID + "'";
+@Transactional
+		public JobApplication getJobApplication(int jobID)
+		{
+			String hql="from JobAppication where jobID = " + "'" + jobID + "'";
 			
 			@SuppressWarnings({ "rawtypes" })
 			Query query=sessionFactory.getCurrentSession().createQuery(hql);
@@ -193,8 +166,12 @@ public class JobDAOImpl implements JobDAO {
 			else
 			{
 				return list.get(0);
-			}
-	
+			}	
+		
 		}
+
+		
+		
+		
 
 }

@@ -20,7 +20,6 @@ import com.niit.collaborationbackend.dao.UserDAO;
 import com.niit.collaborationbackend.model.User;
 
 
-
 @RestController
 public class UserController {
 
@@ -97,23 +96,22 @@ public class UserController {
 	   return new ResponseEntity<User>(user, HttpStatus.OK); 
    }
    
-
-   @RequestMapping(value="/user/{id}",method = RequestMethod.GET)
-  	public ResponseEntity<User> getuser(@PathVariable("id") String id)
-  	{
-  	   Logger.debug("->->-> calling method getUser");
-  	   Logger.debug("->->->->"+id);
-  	   User user = userDAO.get(id);
-  	   if(userDAO.get(id) == null)
-  	   { 
-  		   Logger.debug("->->->->User does not exist with id " +id);
-  		   user = new User();
-  		   user.setErrorMessage("User does not exist with id ");
-  		   return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
-  	   }
-  	   Logger.debug("->->->->User exist with id " +id);
-  	   return new ResponseEntity<User>(user, HttpStatus.OK); 
-  	}
+   @RequestMapping(value="/user",method = RequestMethod.GET)
+	public ResponseEntity<User> getuser(@PathVariable("id") String id)
+	{
+	   Logger.debug("->->-> calling method getUser");
+	   Logger.debug("->->->->"+id);
+	   User user = userDAO.get(id);
+	   if(userDAO.get(id) == null)
+	   { 
+		   Logger.debug("->->->->User does not exist with id " +id);
+		   user = new User();
+		   user.setErrorMessage("User does not exist with id ");
+		   return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+	   }
+	   Logger.debug("->->->->User exist with id " +id);
+	   return new ResponseEntity<User>(user, HttpStatus.OK); 
+	}
    
    @RequestMapping(value = "/user/authenticate/", method = RequestMethod.POST)
    public ResponseEntity<User> authenticate(@RequestBody User user, HttpSession session)
@@ -147,5 +145,5 @@ public class UserController {
 	  
 	  return ("You successfully loggedout");
    }
-
+   
 }

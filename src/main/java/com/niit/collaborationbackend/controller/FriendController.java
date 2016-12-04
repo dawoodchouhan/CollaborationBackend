@@ -1,6 +1,7 @@
 package com.niit.collaborationbackend.controller;
 
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,9 +19,11 @@ import com.niit.collaborationbackend.model.Friends;
 import com.niit.collaborationbackend.model.User;
 
 
+
 @RestController
 
 public class FriendController {
+
 	@Autowired
 	FriendsDAO friendsDAO;
 	
@@ -42,7 +45,6 @@ public class FriendController {
 		friends.setUserID(loggedInUser.getId());
 		friends.setFriendID(friendID);
 		friends.setStatus("N");
-		friends.setIsOnline('Y');
 		friendsDAO.save(friends);
 		return new ResponseEntity<Friends>(friends, HttpStatus.OK);
 	}
@@ -94,5 +96,7 @@ public class FriendController {
 	
 		List<Friends> myFriends = friendsDAO.getMyFriend(id);
 		return new ResponseEntity<List<Friends>>(myFriends, HttpStatus.OK);
-}
+	}
+	
+	
 }

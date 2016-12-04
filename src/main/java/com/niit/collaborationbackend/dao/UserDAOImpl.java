@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.collaborationbackend.model.User;
 
 
+
 @SuppressWarnings("deprecation")
 @EnableTransactionManagement
 @Repository("userDAO")

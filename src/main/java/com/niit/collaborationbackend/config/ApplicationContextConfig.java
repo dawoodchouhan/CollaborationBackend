@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.collaborationbackend.model.Blog;
 import com.niit.collaborationbackend.model.Chat;
+import com.niit.collaborationbackend.model.ChatForumComment;
 import com.niit.collaborationbackend.model.Forum;
 import com.niit.collaborationbackend.model.Friends;
 import com.niit.collaborationbackend.model.Job;
@@ -24,7 +25,7 @@ import com.niit.collaborationbackend.model.User;
 
 
 @Configuration
-@ComponentScan("com.niit.collaborationbackend")
+@ComponentScan("com.niit")
 @EnableTransactionManagement
 
 public class ApplicationContextConfig {
@@ -44,8 +45,7 @@ public class ApplicationContextConfig {
     connectionProperties.setProperty("hibernate.show_sql", "true");
     connectionProperties.setProperty("hibernte.dialect", "org.hibernate.dialect.Oracle10gDialect");
     connectionProperties.setProperty("hiberanate.formate_sql", "true");
-    connectionProperties.setProperty("hibernate.jdbc.use_get_generated_keys", "true");
-    //connectionProperties.setProperty("hibernate.default_schema", "system"); 		
+    connectionProperties.setProperty("hibernate.jdbc.use_get_generated_keys", "true");		
     datasource.setConnectionProperties(connectionProperties);
     
     return datasource;
@@ -62,7 +62,7 @@ public class ApplicationContextConfig {
 	
 	
    @Autowired
-   @Bean(name="sessionfactory")
+   @Bean(name="sessionFactory")
    public SessionFactory getSessionFactory(DataSource datasouce){
    LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(getOracleDataSource());
 	sessionBuilder.addProperties(getHibernateProperties());
@@ -73,7 +73,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Job.class);
 		sessionBuilder.addAnnotatedClass(JobApplication.class);
 		sessionBuilder.addAnnotatedClass(User.class);
-		
+		sessionBuilder.addAnnotatedClass(ChatForumComment.class);
 		
 		System.out.println("Database connected");
 		return sessionBuilder.buildSessionFactory();

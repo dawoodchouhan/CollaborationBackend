@@ -1,5 +1,6 @@
 package com.niit.collaborationbackend.dao;
 
+
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationbackend.model.Blog;
+
 
 
 @SuppressWarnings("deprecation")
@@ -60,7 +62,6 @@ public class BlogDAOImpl implements BlogDAO {
 	       return false;
 		}
 	}//To list the forumitems.
-	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Blog> list(){
@@ -77,35 +78,34 @@ public class BlogDAOImpl implements BlogDAO {
 	}
 	return query.list();
 	}
-
 	@Transactional
 	public Blog get(int id) {
-
-		String hql="from Blog where id = " + "'" + id + "'";
-
-		@SuppressWarnings({ "rawtypes" })
-		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		@SuppressWarnings({ "unchecked" })
-		List<Blog> list=query.list();
-		if(list==null || list.isEmpty())
-		{
-			
-			return null;
-		}
-		else
-		{
-			return list.get(0);
-		}
-	}
-
-	@Transactional
-	public Blog delete(int id) 
-	{
-		Blog BlogToDelete = new Blog();
-		BlogToDelete.setId(id);
-		sessionFactory.getCurrentSession().delete(BlogToDelete);
-		return null;
-	}
-
-	
+		String hql = "from Blog where id = " + "'" + id + "'";
+				
+				Query query = sessionFactory.getCurrentSession().createQuery(hql);
+				List<Blog> list=query.list();
+				if(list==null || list.isEmpty()){
+					return null;
+				}
+				else
+				{
+					return new Blog();
+				}
+			}
+@Transactional
+			public boolean delete(int id) {
+				
+				String hql = "from Blog where id = " + "'" + id + "'";
+				
+				Query query = sessionFactory.getCurrentSession().createQuery(hql);
+				List<Blog> list=query.list();
+				if(list==null || list.isEmpty()) {
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+				
+			}
 }

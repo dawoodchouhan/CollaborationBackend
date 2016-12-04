@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="c_Blog")
+@Table(name = "c_blog")
 @Component
 public class Blog extends BaseDomain {
 
@@ -23,62 +23,60 @@ public class Blog extends BaseDomain {
 	private String description;
 	private Date dateTime;
 	private String status;
-	
-	public Blog(){
-		
+
+	public Blog() {
+
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(Date dateTime) {
+		if (dateTime == null) {
+			dateTime = new Date(System.currentTimeMillis());
+		}
+		this.dateTime = dateTime;
+	}
 
 	public String getUserID() {
 		return userID;
 	}
 
-
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 
-
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public Date getDateTime() {
-		return dateTime;
-	}
-	public void setDateTime(Date dateTime) {
-		if(dateTime==null)
-		{
-			dateTime = new Date( System.currentTimeMillis());
-		}
-		this.dateTime = dateTime;
-	}
-	
-	
-
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 }

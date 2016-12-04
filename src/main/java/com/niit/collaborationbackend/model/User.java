@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class User extends BaseDomain {
 
 	@Id
-	private String id;
+	  
 	private String name;
 	private String email;
 	private String dob;
@@ -24,9 +26,10 @@ public class User extends BaseDomain {
 	private char isOnline;
 	private String gender;
 	private String role;
-	private String Address;
 	private char status;
-	
+	private String Address;
+	private String id;
+
 	public String getId() {
 	return id;
 }
