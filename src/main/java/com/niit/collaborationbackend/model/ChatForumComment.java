@@ -1,5 +1,6 @@
 package com.niit.collaborationbackend.model;
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,8 +10,8 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="c_FORUM_COMMENT")
 @Component
+@Table(name="c_chatforumcomment")
 
 public class ChatForumComment extends BaseDomain {
 	

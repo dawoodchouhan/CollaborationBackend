@@ -114,6 +114,11 @@
     <artifactId>javax.servlet-api</artifactId>
     <version>3.1.0</version>
 </dependency>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
 
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>
