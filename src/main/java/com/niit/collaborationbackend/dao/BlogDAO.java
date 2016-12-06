@@ -14,8 +14,9 @@ public interface BlogDAO {
 	
 	public boolean save(Blog blog);
 	public boolean update(Blog blog);
-	public boolean delete(Blog blog);
+	public Blog delete(int id);
 	public List<Blog> list();
 	public Blog get(int id);
-	public boolean delete(int id);
+
+
 }

@@ -1,5 +1,6 @@
 package com.niit.collaborationbackend.config;
 
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.collaborationbackend.model.Blog;
 import com.niit.collaborationbackend.model.Chat;
+import com.niit.collaborationbackend.model.ChatForum;
 import com.niit.collaborationbackend.model.ChatForumComment;
 import com.niit.collaborationbackend.model.Forum;
 import com.niit.collaborationbackend.model.Friends;
@@ -62,7 +64,7 @@ public class ApplicationContextConfig {
 	
 	
    @Autowired
-   @Bean(name="sessionFactory")
+   @Bean(name="sessionfactory")
    public SessionFactory getSessionFactory(DataSource datasouce){
    LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(getOracleDataSource());
 	sessionBuilder.addProperties(getHibernateProperties());
@@ -73,6 +75,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Job.class);
 		sessionBuilder.addAnnotatedClass(JobApplication.class);
 		sessionBuilder.addAnnotatedClass(User.class);
+		sessionBuilder.addAnnotatedClass(ChatForum.class);
 		sessionBuilder.addAnnotatedClass(ChatForumComment.class);
 		
 		System.out.println("Database connected");

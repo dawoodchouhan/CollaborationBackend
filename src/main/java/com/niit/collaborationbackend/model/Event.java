@@ -1,45 +1,47 @@
 package com.niit.collaborationbackend.model;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-@Entity
-@Table
-@Component
-public class Event extends BaseDomain{
 
-	@Id
-	private String event_Id;
-	private String event_Name;
-	private String event_Venue;
-	private String event_Description;
+@Entity
+@Table(name="c_Event")
+@Component
+
+public class Event extends BaseDomain {
+	
+	private String event_id;
+	private String name;
+	private String venue;
+	private String description;
 	private Date dateTime;
-	public String getEvent_Id() {
-		return event_Id;
+	
+	public String getEvent_id() {
+		return event_id;
 	}
-	public void setEvent_Id(String event_Id) {
-		this.event_Id = event_Id;
+	public void setEvent_id(String event_id) {
+		this.event_id = event_id;
 	}
-	public String getEvent_Name() {
-		return event_Name;
+	public String getName() {
+		return name;
 	}
-	public void setEvent_Name(String event_Name) {
-		this.event_Name = event_Name;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getEvent_Venue() {
-		return event_Venue;
+	public String getVenue() {
+		return venue;
 	}
-	public void setEvent_Venue(String event_Venue) {
-		this.event_Venue = event_Venue;
+	public void setVenue(String venue) {
+		this.venue = venue;
 	}
-	public String getEvent_Description() {
-		return event_Description;
+	public String getDescription() {
+		return description;
 	}
-	public void setEvent_Description(String event_Description) {
-		this.event_Description = event_Description;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public Date getDateTime() {
 		return dateTime;
@@ -49,4 +51,5 @@ public class Event extends BaseDomain{
 	}
 	
 	
+
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.collaborationbackend.model.Forum;
 
 
+
 @SuppressWarnings("deprecation")
 @EnableTransactionManagement
 @Repository("forumDAO")
@@ -64,19 +65,6 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 
 		
-		/*@Transactional
-		public void saveOrUpdate(Forum forum){            //save or update
-			sessionFactory.getCurrentSession().saveOrUpdate(forum);
-			System.out.println("connect to controllerimp");
-		}
-		@Transactional
-		public void delete(int Id)
-		{
-			Forum forumToDelete = new Forum();
-			forumToDelete.setForum_Id(Id);
-			sessionFactory.getCurrentSession().delete(forumToDelete);
-		
-		}*/
 		//To list the forumitems.
 				@SuppressWarnings("unchecked")
 				@Transactional

@@ -62,6 +62,7 @@ public class BlogDAOImpl implements BlogDAO {
 	       return false;
 		}
 	}//To list the forumitems.
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Blog> list(){
@@ -78,34 +79,35 @@ public class BlogDAOImpl implements BlogDAO {
 	}
 	return query.list();
 	}
+
 	@Transactional
 	public Blog get(int id) {
-		String hql = "from Blog where id = " + "'" + id + "'";
-				
-				Query query = sessionFactory.getCurrentSession().createQuery(hql);
-				List<Blog> list=query.list();
-				if(list==null || list.isEmpty()){
-					return null;
-				}
-				else
-				{
-					return new Blog();
-				}
-			}
-@Transactional
-			public boolean delete(int id) {
-				
-				String hql = "from Blog where id = " + "'" + id + "'";
-				
-				Query query = sessionFactory.getCurrentSession().createQuery(hql);
-				List<Blog> list=query.list();
-				if(list==null || list.isEmpty()) {
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-				
-			}
+
+		String hql="from Blog where id = " + "'" + id + "'";
+
+		@SuppressWarnings({ "rawtypes" })
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings({ "unchecked" })
+		List<Blog> list=query.list();
+		if(list==null || list.isEmpty())
+		{
+			
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+	}
+
+	@Transactional
+	public Blog delete(int id) 
+	{
+		Blog BlogToDelete = new Blog();
+		BlogToDelete.setId(id);
+		sessionFactory.getCurrentSession().delete(BlogToDelete);
+		return null;
+	}
+
+	
 }

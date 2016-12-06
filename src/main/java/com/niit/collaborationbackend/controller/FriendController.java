@@ -45,6 +45,7 @@ public class FriendController {
 		friends.setUserID(loggedInUser.getId());
 		friends.setFriendID(friendID);
 		friends.setStatus("N");
+		friends.setIsOnline('Y');
 		friendsDAO.save(friends);
 		return new ResponseEntity<Friends>(friends, HttpStatus.OK);
 	}

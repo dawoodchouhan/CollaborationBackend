@@ -1,5 +1,6 @@
 package com.niit.collaborationbackend.dao;
 
+
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -10,11 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.collaborationbackend.model.Blog;
 import com.niit.collaborationbackend.model.Job;
 import com.niit.collaborationbackend.model.JobApplication;
-
-
 
 @SuppressWarnings("deprecation")
 @EnableTransactionManagement
@@ -52,8 +50,7 @@ public class JobDAOImpl implements JobDAO {
 				return false;
 			}
 			return true;
-		}	
-		
+		}
 		
 		@Transactional
 		public boolean postJob(Job job) {
@@ -86,7 +83,7 @@ public class JobDAOImpl implements JobDAO {
 		@SuppressWarnings("rawtypes")
 		Query query =sessionFactory.getCurrentSession().createQuery(hql);
 		
-		List<Blog> listJob = query.list();
+		List<Job> listJob = query.list();
 		if(listJob == null  || listJob.isEmpty())
 		{
 			 return null;
@@ -141,18 +138,19 @@ public class JobDAOImpl implements JobDAO {
 		
 		@Transactional
 		public List<Job> getAllJobs() {
-			String hql = "fromJob";
+			String hql = "from Job";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			return query.list();
 		}
 
-		public Job getJobDetails(int JobID) {
-			return (Job) sessionFactory.getCurrentSession().get(Job.class, JobID);
+		@Transactional
+		public Job getJobDetails(int jobID) {
+			return (Job) sessionFactory.getCurrentSession().get(Job.class, jobID);
 		}
-@Transactional
-		public JobApplication getJobApplication(int jobID)
-		{
-			String hql="from JobAppication where jobID = " + "'" + jobID + "'";
+
+		@Transactional
+		public JobApplication getJobApplication(int jobID) {
+			String hql= "from JobApplication where jobID = " + "'" + jobID + "'";
 			
 			@SuppressWarnings({ "rawtypes" })
 			Query query=sessionFactory.getCurrentSession().createQuery(hql);
@@ -166,12 +164,8 @@ public class JobDAOImpl implements JobDAO {
 			else
 			{
 				return list.get(0);
-			}	
-		
+			}
+	
 		}
-
-		
-		
-		
 
 }

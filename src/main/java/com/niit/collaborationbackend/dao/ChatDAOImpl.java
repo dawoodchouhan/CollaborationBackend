@@ -80,22 +80,4 @@ public class ChatDAOImpl implements ChatDAO
 		}
 		return query.list();
 		}
-
-		public Chat get(int chat_Id) {
-			String hql="from chat where chat_Id = " + "'" + chat_Id + "'";
-			
-			@SuppressWarnings({ "rawtypes" })
-			Query query=sessionFactory.getCurrentSession().createQuery(hql);
-			@SuppressWarnings({ "unchecked" })
-			List<Chat> list=query.list();
-			if(list==null || list.isEmpty())
-			{
-				
-				return null;
-			}
-			else
-			{
-				return list.get(0);
-			}
-		}
 }

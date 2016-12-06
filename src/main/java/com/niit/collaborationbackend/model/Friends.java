@@ -1,5 +1,4 @@
 package com.niit.collaborationbackend.model;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,18 +8,18 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="c_friends")
+@Table(name="c_friend")
 @Component
-public class Friends extends BaseDomain{
+public class Friends {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String userID;
 	private String friendID;
 	private String status;
 	private char isOnline;
-	
+
 	
 	
 	public String getUserID() {
@@ -29,6 +28,7 @@ public class Friends extends BaseDomain{
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+	
 	public String getFriendID() {
 		return friendID;
 	}
