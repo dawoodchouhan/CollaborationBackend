@@ -1,6 +1,7 @@
 package com.niit.collaborationbackend.model;
 
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,12 +13,12 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="c_Blog")
+@Table(name="c_blog")
 @Component
 public class Blog extends BaseDomain {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String title;
 	private String userID;
@@ -37,16 +38,6 @@ public class Blog extends BaseDomain {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-
-	public String getUserID() {
-		return userID;
-	}
-
-
-	public void setUserID(String userID) {
-		this.userID = userID;
 	}
 
 
@@ -72,8 +63,17 @@ public class Blog extends BaseDomain {
 		}
 		this.dateTime = dateTime;
 	}
-	
-	
+
+
+	public String getUserID() {
+		return userID;
+	}
+
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
 
 	public String getStatus() {
 		return status;

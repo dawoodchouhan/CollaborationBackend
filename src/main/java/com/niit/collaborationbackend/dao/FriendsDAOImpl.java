@@ -61,19 +61,7 @@ public class FriendsDAOImpl implements FriendsDAO {
 		       return false;
 			}
 		}
-		
-	/*	@Transactional
-		public boolean delete(Friends friends){
-			try{
-		       sessionFactory.getCurrentSession().delete(friends);
-		return true;
-			} catch (Exception e){
-				//TODO Auto-generated catch block
-		       e.printStackTrace();
-		       return false;
-			}
-		}*/
-		
+	
 		@Transactional
 		public Friends get(String userID, String friendID) {
 			String hql = "from Friend where userID=" + "'" + userID + "' and friendID= '" + friendID + "N'";

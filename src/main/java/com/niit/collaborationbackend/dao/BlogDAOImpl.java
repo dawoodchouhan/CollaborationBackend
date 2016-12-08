@@ -61,7 +61,7 @@ public class BlogDAOImpl implements BlogDAO {
 	       e.printStackTrace();
 	       return false;
 		}
-	}//To list the forumitems.
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional

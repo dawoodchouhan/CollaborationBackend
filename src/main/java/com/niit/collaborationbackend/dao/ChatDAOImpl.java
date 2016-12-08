@@ -63,7 +63,7 @@ public class ChatDAOImpl implements ChatDAO
 		       e.printStackTrace();
 		       return false;
 			}
-		}//To list the Chat items.
+		}
 		@SuppressWarnings("unchecked")
 		@Transactional
 		public List<Chat> list(){

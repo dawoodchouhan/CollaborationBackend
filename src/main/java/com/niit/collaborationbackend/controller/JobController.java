@@ -35,15 +35,6 @@ public class JobController {
 	@Autowired
 	JobApplication jobApplication;
 
-	// @CrossOrigin(Origins = "http://localhost:8088")
-	/*
-	 * @RequestMapping(value="/getAllJobs/" , method = RequestMethod.GET) public
-	 * ResponseEntity<List<Job>> getAllOpenedJobs() { logger.debug(
-	 * "Starting of the method getAllOpenedJobs"); List<Job> jobs =
-	 * jobDAO.getAllJobs(); return new ResponseEntity<List<Job>>(jobs,
-	 * HttpStatus.OK); }
-	 */
-
 	@RequestMapping(value = "/getAllJobs/", method = RequestMethod.GET)
 	public ResponseEntity<List<Job>> getjobs() {
 		List<Job> jobs = jobDAO.list();
@@ -61,8 +52,6 @@ public class JobController {
 	public ResponseEntity<Job> applyforJob(@PathVariable("jobID") int jobID, HttpSession httpSession) {
 		logger.debug("Starting of the method getMyAppliedJobs");
 		String loggedInUserID = (String) httpSession.getAttribute("loggedInUserID");
-
-		/* jobApplication = jobDAO.getJobApplication(jobID); */
 		jobApplication.setUserID(loggedInUserID);
 		jobApplication.setStatus('N');
 		if (jobDAO.save(jobApplication)) {
@@ -77,8 +66,6 @@ public class JobController {
 	public ResponseEntity<List<Job>> getMyAppliedJobs(HttpSession httpSession) {
 		logger.debug("Starting of the method getMyAppliedJobs");
 		String loggedInUserID = (String) httpSession.getAttribute("loggedInUserID");
-
-		// List<Job> job = jobDAO.getMyAppliedJobs(loggedInUserID);
 		List<Job> job = (List<Job>) jobDAO.getMyAppliedJobs(loggedInUserID);
 		return new ResponseEntity<List<Job>>(job, HttpStatus.OK);
 	}
@@ -90,17 +77,7 @@ public class JobController {
 		return new ResponseEntity<Job>(job, HttpStatus.OK);
 	}
 
-	/*
-	 * @RequestMapping(value="/getAllOpenedJobs" , method = RequestMethod.POST)
-	 * public ResponseEntity<Job> getAllOpenedJobs(@RequestBody Job job) {
-	 * logger.debug("Starting of the method getAllOpenedJobs");
-	 * job.setStatus('V'); // 1) V->Vacant , 2) F->Filled , 3) P->Pending
-	 * 
-	 * if(jobDAO.save(job) == false) { job.setErrorCode("404");
-	 * job.setErrorMessage("Not able to post a job"); logger.debug(
-	 * "Not able to post a job"); } return new ResponseEntity<Job>(job ,
-	 * HttpStatus.OK); }
-	 */
+	
 
 	@RequestMapping(value = "/getAllJobDetails/{jobID}", method = RequestMethod.PUT)
 	public ResponseEntity<Job> getAllJobDetails(@RequestParam("jobID") int jobID, HttpSession httpSession) {
@@ -147,8 +124,6 @@ public class JobController {
 	public ResponseEntity<Job> rejectJobApplication(@PathVariable("userID") int userID,
 			@PathVariable("jobID") int jobID) {
 		logger.debug("Starting of the method rejectJobApplication");
-		// jobApplication = jobDAO.getJobApplication(userID, jobID);
-
 		jobApplication.setStatus('R');
 		if (jobDAO.save(jobApplication) == false) {
 			job.setErrorCode("404");

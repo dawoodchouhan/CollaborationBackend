@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="c_Event")
+@Table
 @Component
 
 public class Event extends BaseDomain {

@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 		       e.printStackTrace();
 		       return false;
 			}
-		}//To list the UserDetails items.
+		}
 		
 		@SuppressWarnings("unchecked")
 		@Transactional
