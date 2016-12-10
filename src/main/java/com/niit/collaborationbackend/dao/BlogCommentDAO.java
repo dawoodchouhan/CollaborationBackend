@@ -10,8 +10,6 @@ import com.niit.collaborationbackend.model.BlogComment;
 
 @Repository("blogCommentDAO")
 public interface BlogCommentDAO {
-
-	
 	public boolean save(BlogComment blogComment);
 	public List<BlogComment> list();
 	public BlogComment get(int id); 
