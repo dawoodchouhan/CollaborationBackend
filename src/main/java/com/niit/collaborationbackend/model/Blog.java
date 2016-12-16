@@ -1,7 +1,5 @@
 package com.niit.collaborationbackend.model;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -25,10 +23,6 @@ public class Blog extends BaseDomain {
 	private String description;
 	private Date dateTime;
 	private String status;
-	
-	public Blog(){
-		
-	}
 	
 	
 	public int getId() {

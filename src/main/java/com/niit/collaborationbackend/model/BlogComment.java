@@ -44,13 +44,12 @@ public class BlogComment extends BaseDomain {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-	
-	
-	public String getBlogcomment() {
+
+	public String getBcomment() {
 		return bcomment;
 	}
-	public void setBlogcomment(String blogcomment) {
-		this.bcomment = blogcomment;
+	public void setBcomment(String bcomment) {
+		this.bcomment = bcomment;
 	}
 	public Date getDateTime() {
 		return dateTime;

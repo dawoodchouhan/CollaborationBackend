@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationbackend.model.User;
 
-
-
 @SuppressWarnings("deprecation")
 @EnableTransactionManagement
 @Repository("userDAO")
@@ -32,6 +30,14 @@ public class UserDAOImpl implements UserDAO {
 		}
 		
 		@Transactional
+		public void saveOrUpdate(User user) 
+		{ 
+			// save or update
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
+			
+		}
+		
+		@Transactional
 		public boolean save(User userDetails){	
 			
 			try{
@@ -42,7 +48,8 @@ public class UserDAOImpl implements UserDAO {
 				e.printStackTrace();
 				return false;
 			}
-		}	
+		}
+		
 		@Transactional
 		public boolean update(User user){
 			
@@ -55,6 +62,7 @@ public class UserDAOImpl implements UserDAO {
 		       return false;
 			}
 		}
+		
 		@Transactional
 		public boolean delete(User user){
 			try{
@@ -65,7 +73,7 @@ public class UserDAOImpl implements UserDAO {
 		       e.printStackTrace();
 		       return false;
 			}
-		}
+		}//To list the UserDetails items.
 		
 		@SuppressWarnings("unchecked")
 		@Transactional

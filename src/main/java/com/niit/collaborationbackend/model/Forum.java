@@ -1,6 +1,5 @@
 package com.niit.collaborationbackend.model;
 
-
 import java.util.Date;
 
 import javax.persistence.Entity;

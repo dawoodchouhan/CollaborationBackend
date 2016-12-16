@@ -1,6 +1,5 @@
 package com.niit.collaborationbackend.model;
 
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 
 @Entity
-@Table(name="c_Job")
+@Table(name="c_job")
 @Component
 public class Job extends BaseDomain {
 
@@ -27,6 +26,9 @@ public class Job extends BaseDomain {
 		private Date dateTime;
 		private String qualification;
 		private String status;
+		
+		
+		
 		
 		public String getUserID() {
 			return userID;

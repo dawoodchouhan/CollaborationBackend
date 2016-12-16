@@ -1,12 +1,18 @@
 package com.niit.collaborationbackend.model;
 
-
 public class Message {
 
 	private String message;
 	private String name;
-	
 	private int id;
+	
+	public String getUserID() {
+		return name;
+	}
+	
+	public void setUserID(String name) {
+		this.name=name;
+	}
 	
 	public Message() {
 		
@@ -17,15 +23,6 @@ public class Message {
 		this.message = message;
 	}
 	
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getMessage() {
 		return message;
 	}
@@ -41,6 +38,15 @@ public class Message {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 
 	
 }

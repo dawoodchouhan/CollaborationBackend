@@ -1,6 +1,5 @@
 package com.niit.collaborationbackend.config;
 
-
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -16,14 +15,14 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.collaborationbackend.model.Blog;
-import com.niit.collaborationbackend.model.Chat;
-import com.niit.collaborationbackend.model.ChatForum;
-import com.niit.collaborationbackend.model.ChatForumComment;
+import com.niit.collaborationbackend.model.BlogComment;
 import com.niit.collaborationbackend.model.Forum;
 import com.niit.collaborationbackend.model.Friends;
 import com.niit.collaborationbackend.model.Job;
 import com.niit.collaborationbackend.model.JobApplication;
 import com.niit.collaborationbackend.model.User;
+
+
 
 
 @Configuration
@@ -47,13 +46,14 @@ public class ApplicationContextConfig {
     connectionProperties.setProperty("hibernate.show_sql", "true");
     connectionProperties.setProperty("hibernte.dialect", "org.hibernate.dialect.Oracle10gDialect");
     connectionProperties.setProperty("hiberanate.formate_sql", "true");
-    connectionProperties.setProperty("hibernate.jdbc.use_get_generated_keys", "true");		
+    connectionProperties.setProperty("hibernate.jdbc.use_get_generated_keys", "true");
+    //connectionProperties.setProperty("hibernate.default_schema", "system"); 		
     datasource.setConnectionProperties(connectionProperties);
     
     return datasource;
     
     }
-
+	
 	private Properties getHibernateProperties(){
 		Properties properties=new Properties();
 		properties.put("hibernate.show_sql", "true");
@@ -61,22 +61,23 @@ public class ApplicationContextConfig {
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
+
 	
 	
    @Autowired
-   @Bean(name="sessionfactory")
+   @Bean(name="sessionFactory")
    public SessionFactory getSessionFactory(DataSource datasouce){
    LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(getOracleDataSource());
 	sessionBuilder.addProperties(getHibernateProperties());
-		sessionBuilder.addAnnotatedClass(Chat.class);
+		
 		sessionBuilder.addAnnotatedClass(Forum.class);
 		sessionBuilder.addAnnotatedClass(Blog.class);
+		sessionBuilder.addAnnotatedClass(BlogComment.class);
+		
 		sessionBuilder.addAnnotatedClass(Friends.class);
 		sessionBuilder.addAnnotatedClass(Job.class);
 		sessionBuilder.addAnnotatedClass(JobApplication.class);
 		sessionBuilder.addAnnotatedClass(User.class);
-		sessionBuilder.addAnnotatedClass(ChatForum.class);
-		sessionBuilder.addAnnotatedClass(ChatForumComment.class);
 		
 		System.out.println("Database connected");
 		return sessionBuilder.buildSessionFactory();

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import com.niit.collaborationbackend.model.User;
 
-
-
 @Repository
 public interface UserDAO {
 
+	
+	public void saveOrUpdate(User user);
 		public boolean save(User user);
 		public boolean update(User user);
 		public boolean delete(User user);

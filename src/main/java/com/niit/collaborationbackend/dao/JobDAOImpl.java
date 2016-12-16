@@ -1,6 +1,5 @@
 package com.niit.collaborationbackend.dao;
 
-
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -13,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationbackend.model.Job;
 import com.niit.collaborationbackend.model.JobApplication;
+import com.niit.collaborationbackend.model.User;
 
 @SuppressWarnings("deprecation")
 @EnableTransactionManagement
@@ -50,7 +50,7 @@ public class JobDAOImpl implements JobDAO {
 				return false;
 			}
 			return true;
-		}
+		}	
 		
 		@Transactional
 		public boolean postJob(Job job) {
@@ -92,6 +92,23 @@ public class JobDAOImpl implements JobDAO {
 		return query.list();
 		}
 
+
+		@SuppressWarnings("unchecked")
+		@Transactional
+		public List<JobApplication> listJobApplication(){
+			
+			String hql = "from JobApplication";
+		@SuppressWarnings("rawtypes")
+		Query query =sessionFactory.getCurrentSession().createQuery(hql);
+		
+		List<JobApplication> listJobApplication = query.list();
+		if(listJobApplication == null  || listJobApplication.isEmpty())
+		{
+			 return null;
+			 
+		}
+		return query.list();
+		}
 		
 		@Transactional
 		public List<Job> getAllVacantJobs() {
@@ -144,13 +161,14 @@ public class JobDAOImpl implements JobDAO {
 		}
 
 		@Transactional
-		public Job getJobDetails(int jobID) {
-			return (Job) sessionFactory.getCurrentSession().get(Job.class, jobID);
+		public Job getJobDetails(int JobID) {
+			return (Job) sessionFactory.getCurrentSession().get(Job.class, JobID);
 		}
 
 		@Transactional
-		public JobApplication getJobApplication(int jobID) {
-			String hql= "from JobApplication where jobID = " + "'" + jobID + "'";
+		public JobApplication getJobApplication(int id)
+		{
+			String hql="from JobApplication where id = " + "'" + id + "'";
 			
 			@SuppressWarnings({ "rawtypes" })
 			Query query=sessionFactory.getCurrentSession().createQuery(hql);
@@ -164,8 +182,12 @@ public class JobDAOImpl implements JobDAO {
 			else
 			{
 				return list.get(0);
-			}
-	
+			}	
+		
 		}
+
+		
+		
+		
 
 }

@@ -1,6 +1,5 @@
 package com.niit.collaborationbackend.dao;
 
-
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -11,8 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationbackend.model.Blog;
-
-
 
 @SuppressWarnings("deprecation")
 @EnableTransactionManagement
@@ -61,7 +58,7 @@ public class BlogDAOImpl implements BlogDAO {
 	       e.printStackTrace();
 	       return false;
 		}
-	}
+	}//To list the forumitems.
 	
 	@SuppressWarnings("unchecked")
 	@Transactional

@@ -1,6 +1,5 @@
 package com.niit.collaborationbackend.dao;
 
-
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationbackend.model.Friends;
-
 
 
 @SuppressWarnings("deprecation")
@@ -29,13 +27,27 @@ public class FriendsDAOImpl implements FriendsDAO {
 			this.sessionFactory=sessionFactory;
 		}
 		
-		private Integer getMaxId()
+		@Transactional
+		public Friends get(int id) 
 		{
-			String hql = "select max{id} from friend";
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
-			Integer maxID = (Integer) query.uniqueResult();
-			return maxID;
+			
+			String hql="from Friends where id = " + "'" + id + "'";
+	
+			@SuppressWarnings({ "rawtypes" })
+			Query query=sessionFactory.getCurrentSession().createQuery(hql);
+			@SuppressWarnings({ "unchecked" })
+			List<Friends> list=query.list();
+			if(list==null || list.isEmpty())
+			{
+				
+				return null;
+			}
+			else
+			{
+				return list.get(0);
+			}
 		}
+
 		
 		@Transactional
 		public boolean save(Friends friends){	
@@ -61,7 +73,9 @@ public class FriendsDAOImpl implements FriendsDAO {
 		       return false;
 			}
 		}
+		
 	
+		
 		@Transactional
 		public Friends get(String userID, String friendID) {
 			String hql = "from Friend where userID=" + "'" + userID + "' and friendID= '" + friendID + "N'";
@@ -95,7 +109,10 @@ public class FriendsDAOImpl implements FriendsDAO {
 			
 			@SuppressWarnings("unchecked")
 			List<Friends> list = (List<Friends>) query.list();
+			if(list!=null||!list.isEmpty())
 			return list;
+			else
+				return null;
 			
 		}
 
@@ -112,9 +129,9 @@ public class FriendsDAOImpl implements FriendsDAO {
 
 		
 		@Transactional
-		public void setOnline(String userID) {
+		public void setOnline(String loggedInUserID) {
 			Logger.debug("Starting of the method setOnline");
-			String hql = "UPDATE Friend SET isOnline = 'Y' where userID ='" + "'";
+			String hql = "UPDATE Friend SET isOnline = 'Y' where userID ='" + loggedInUserID + "'";
 			Logger.debug("hql: " + hql);
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			query.executeUpdate();
@@ -123,14 +140,14 @@ public class FriendsDAOImpl implements FriendsDAO {
 		
 
 		@Transactional
-		public void setOffLine(String userID) {
+		public void setOffLine(String loggedInUserID) {
 			Logger.debug("Starting of the method setOffline");
-			String hql = "UPDATE Friend SET isOnline = 'N' where userID = '" + userID + "'";
+			String hql = "UPDATE Friend SET isOnline = 'N' where userID = '" + loggedInUserID + "'";
 			Logger.debug("hql: " + hql);
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			query.executeUpdate();
 			Logger.debug("Ending of the method setOffline");
 		}
-
+		
 		
 }

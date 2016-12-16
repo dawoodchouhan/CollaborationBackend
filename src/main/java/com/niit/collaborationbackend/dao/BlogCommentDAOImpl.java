@@ -17,11 +17,11 @@ public class BlogCommentDAOImpl implements BlogCommentDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	public BlogCommentDAOImpl(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	public BlogCommentDAOImpl(SessionFactory sessionFactory)
+	{
+		this.sessionFactory=sessionFactory;
 	}
-
+	
 	@Transactional
 	public boolean save(BlogComment blogComment) {
 		try {
@@ -31,36 +31,41 @@ public class BlogCommentDAOImpl implements BlogCommentDAO {
 			e.printStackTrace();
 			return false;
 		}
-
+		
 	}
 
 	@Transactional
 	public List<BlogComment> list() {
-
-		String hql = "from BlogComment";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-
+		
+		String hql= "from BlogComment";
+		@SuppressWarnings({ "rawtypes" })
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings({ "unchecked" })
 		List<BlogComment> listBlogComment = query.list();
-		if (listBlogComment == null || listBlogComment.isEmpty()) {
-			return null;
+		if(listBlogComment == null || listBlogComment.isEmpty())
+		{
+			return null;	
 		}
 		return query.list();
-
+		
 	}
 
 	@Transactional
-	public BlogComment get(int id) {
-
-		String hql = "from BlogComment where id=" + "'" + id + "'";
-
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	public List<BlogComment> get(int blogID) {
+		
+		String hql = "from BlogComment where blogID=" +"'" +blogID +"'";
+		@SuppressWarnings({ "rawtypes" })
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings({ "unchecked" })
-		List<BlogComment> list = query.list();
-		if (list == null || list.isEmpty()) {
-
+		List<BlogComment> list=query.list();
+		if(list==null || list.isEmpty())
+		{
+			
 			return null;
-		} else {
-			return new BlogComment();
+		}
+		else
+		{
+			return list;
 		}
 	}
 

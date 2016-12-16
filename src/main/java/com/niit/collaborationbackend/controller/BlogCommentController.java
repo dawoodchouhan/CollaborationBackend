@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationbackend.dao.BlogCommentDAO;
+import com.niit.collaborationbackend.model.Blog;
 import com.niit.collaborationbackend.model.BlogComment;
-
-
 
 @RestController
 public class BlogCommentController {
@@ -45,32 +44,37 @@ public class BlogCommentController {
          }
 	}
 	
-	@RequestMapping(value = "/blogcomment{id}" , method = RequestMethod.GET)
-	public BlogComment getBlog(@PathVariable("id")int id){
+	@RequestMapping(value = "/blogcomment/{blogID}" , method = RequestMethod.GET)
+	public ResponseEntity<List<BlogComment>> getBlog(@PathVariable("blogID")int blogID){
 		
-		BlogComment blogcoment = blogCommentDAO.get(id);
-		if(blogcoment == null)
+		List<BlogComment> blogcomments = blogCommentDAO.get(blogID);
+		if(blogcomments == null)
 		{
-			blogcoment = new BlogComment();
-			blogcoment.setErrorCode("404");
-			blogcoment.setErrorMessage("Blog not found with the id"+ id);
+			blogComment = new BlogComment();
+			blogComment.setErrorCode("404");
+			blogComment.setErrorMessage("Blog not found with the id"+ blogID);
 		}
 		
-		return blogComment;
+		return new ResponseEntity<List<BlogComment>>(blogcomments,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/blogcomment/" , method = RequestMethod.POST)
-	public ResponseEntity<BlogComment> createBlog(@RequestBody String comm, /*@PathVariable("blogID") int blogID,*/ HttpSession httpsession) {
-		System.out.println("Comment from the front end "+blogComment.getBlogcomment());
+	@RequestMapping(value = "/blogcomment/{id}/{bcomment}/{rating}" , method = RequestMethod.POST)
+	public ResponseEntity<BlogComment> createBlog(@RequestBody BlogComment blogcomment, @PathVariable("id") int id,
+			                @PathVariable("bcomment") String bcomment, @PathVariable("rating") String rating, HttpSession httpsession) {
+		
+		System.out.println("Comment from the front end "+blogComment.getBcomment());
    		String loggedInuserID = (String) httpsession.getAttribute("loggedInUserID");
 	
    		blogComment.setUserID(loggedInuserID);  	
-   		/*blogComment.setBlogID(blogID);*/
-   		blogComment.setBlogcomment(comm);
+   		blogComment.setBlogID(id);
+   		blogComment.setBcomment(bcomment);
+   		blogComment.setRating(rating);
    		blogComment.setDateTime(null);
 		blogCommentDAO.save(blogComment);
 		
 		return new ResponseEntity<BlogComment>(blogComment, HttpStatus.OK);
 	}
+	
+	
 	
 }

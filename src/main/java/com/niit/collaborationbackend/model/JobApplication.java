@@ -1,7 +1,5 @@
 package com.niit.collaborationbackend.model;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,29 +12,27 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table(name="c_JobApplication")
-public class JobApplication {
-
+@Table(name="c_jobapplication")
+public class JobApplication extends BaseDomain{
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String userID;
+	private String UserID;
 	private int jobID;
-    private Date dateApplied;
+	private Date dateTime;
     private String remarks;
-    private char status;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-    
+	private String status;
+	
+	
+	
+	
+	
 	public String getUserID() {
-		return userID;
+		return UserID;
 	}
 	public void setUserID(String userID) {
-		this.userID = userID;
+		UserID = userID;
 	}
 	public int getJobID() {
 		return jobID;
@@ -44,24 +40,37 @@ public class JobApplication {
 	public void setJobID(int jobID) {
 		this.jobID = jobID;
 	}
-	public Date getDateApplied() {
-		return dateApplied;
-	}
-	public void setDateApplied(Date dateApplied) {
-		this.dateApplied = dateApplied;
-	}
 	public String getRemarks() {
 		return remarks;
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public char getStatus() {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Date getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(Date dateTime) {
+		if(dateTime==null)
+		{
+			dateTime = new Date( System.currentTimeMillis());
+		}
+		this.dateTime = dateTime;
+	}
+	
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
+	
     
 	
 	
